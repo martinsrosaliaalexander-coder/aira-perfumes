@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aira Perfumes | Essências Exclusivas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --medium-gray: #2d2d2d;
+            --light-gray: #8a8a8a;
+            --white: #ffffff;
+            --gold: #d4af37;
+            --gold-light: #f4e5c2;
+            --copper: #b87333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--gold);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+
+        .nav-cta:hover {
+            color: var(--black);
+        }
+
+        .nav-cta:hover::before {
+            left: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 50%, #0f0f0f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero-logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 40px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            color: var(--gold);
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-logo::after {
+            content: 'AIRA';
+            position: absolute;
+            bottom: -40px;
+            font-size: 1.2rem;
+            letter-spacing: 8px;
+            color: var(--white);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 20px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--light-gray);
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+            padding: 18px 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 2px solid var(--gold);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 18px 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 5%;
+            background: var(--dark-gray);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px 30px;
+            border: 1px solid rgba(212,175,55,0.1);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            border-color: rgba(212,175,55,0.3);
+            transform: translateY(-5px);
+            background: rgba(212,175,55,0.02);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        .feature-card p {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Decants Section */
+        .decants {
+            padding: 120px 5%;
+            background: linear-gradient(to bottom, var(--dark-gray), var(--black));
+            position: relative;
+        }
+
+        .decants-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .decants-content h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: var(--gold);
+        }
+
+        .decants-content p {
+            color: var(--light-gray);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .decant-sizes {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .size-tag {
+            background: rgba(212,175,55,0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 25px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .size-tag:hover {
+            background: var(--gold);
+            color: var(--black);
+            cursor: pointer;
+        }
+
+        .decants-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bottle-display {
+            width: 200px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 20px 20px 40px 40px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 30px rgba(212,175,55,0.1);
+        }
+
+        .bottle-display::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 40px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.3), rgba(212,175,55,0.1));
+            border-radius: 10px 10px 0 0;
+            border: 1px solid rgba(212,175,55,0.3);
+        }
+
+        .liquid {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 60%;
+            background: linear-gradient(to top, rgba(212,175,55,0.6), rgba(212,175,55,0.2));
+            border-radius: 0 0 25px 25px;
+            animation: fillUp 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes fillUp {
+            0% { height: 40%; }
+            100% { height: 70%; }
+        }
+
+        /* Products Section */
+        .products {
+            padding: 120px 5%;
+            background: var(--black);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .section-header p {
+            color: var(--light-gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: none;
+            color: var(--light-gray);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            padding: 10px 20px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            color: var(--gold);
+        }
+
+        .filter-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, var(--dark-gray), var(--medium-gray));
+            border: 1px solid rgba(255,255,255,0.05);
+            overflow: hidden;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.1);
+            border-color: rgba(212,175,55,0.2);
+        }
+
+        .product-image {
+            height: 320px;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: var(--black);
+            padding: 5px 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        .product-info {
+            padding: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-category {
+            color: var(--gold);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-add-cart {
+            flex: 1;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 12px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-add-cart:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .btn-quick-view {
+            width: 45px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-quick-view:hover {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        /* Club Section */
+        .club {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, var(--dark-gray) 0%, var(--black) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .club::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
+        }
+
+        .club-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 80px 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .club-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+        }
+
+        .club h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .club p {
+            color: var(--light-gray);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .club-benefits {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gold-light);
+            font-size: 0.95rem;
+        }
+
+        .benefit-item i {
+            color: var(--gold);
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: #25D366;
+            color: white;
+            padding: 20px 50px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(37,211,102,0.3);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37,211,102,0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 80px 5% 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: var(--light-gray);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul li a {
+            color: var(--light-gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+
+        .footer-column ul li a i {
+            font-size: 0.8rem;
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 30px;
+            text-align: center;
+            color: var(--light-gray);
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom span {
+            color: var(--gold);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .decants-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .club-benefits {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">A<span>R</span></a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#decants">Decants</a></li>
+            <li><a href="#produtos">Produtos</a></li>
+            <li><a href="#clube">Clube VIP</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+        <a href="https://wa.me/5511987300190" class="nav-cta" target="_blank">Falar com Vendedor</a>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-logo">AR</div>
+            <h1>Essências que Marcam Presença</h1>
+            <p>Perfumes 100% originais, importados e selecionados. Decants exclusivos e um clube de vantagens para quem entende de fragrâncias.</p>
+            <div class="hero-buttons">
+                <a href="#produtos" class="btn-primary">Ver Catálogo</a>
+                <a href="https://wa.me/5511987300190" class="btn-secondary" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down" style="color: var(--gold); font-size: 1.5rem;"></i>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="feature-card fade-in">
+            <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+            <h3>100% Original</h3>
+            <p>Garantia de autenticidade em cada fragrância. Todos os nossos perfumes são importados e lacrados.</p>
+        </div>
+        <div class="feature-card fade-in">
+            <div class="feature-icon"><i class="fas fa-flask"></i></div>
+            <h3>Sistema de Decants</h3>
+            <p>Experimente antes de comprar o frasco completo. Vendas por ml com preços acessíveis.</p>
+        </div>
+        <div class="feature-card fade-in">
+            <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
+            <h3>Entrega Rápida</h3>
+            <p>Agilidade para você receber seu pedido o quanto antes. Enviamos para todo o Brasil.</p>
+        </div>
+        <div class="feature-card fade-in">
+            <div class="feature-icon"><i class="fas fa-credit-card"></i></div>
+            <h3>Parcelamento</h3>
+            <p>Facilidade no pagamento para comprar sem pesar no bolso. Parcelamos no cartão.</p>
+        </div>
+    </section>
+
+    <!-- Decants Section -->
+    <section class="decants" id="decants">
+        <div class="decants-container">
+            <div class="decants-content fade-in">
+                <h2>Sistema de Decants</h2>
+                <p>Quer experimentar um perfume antes de investir no frasco completo? Nosso sistema de decants permite que você compre quantidades menores (por ml) dos melhores perfumes do mercado.</p>
+                <p>Ideal para quem gosta de variedade, para presentear ou simplesmente para testar antes de comprar. Todos os decants são preparados com equipamentos esterilizados e embalagens de alta qualidade.</p>
+                <div class="decant-sizes">
+                    <span class="size-tag">5ml</span>
+                    <span class="size-tag">10ml</span>
+                    <span class="size-tag">15ml</span>
+                    <span class="size-tag">30ml</span>
+                </div>
+                <a href="https://wa.me/5511987300190?text=Olá! Gostaria de saber mais sobre os decants disponíveis." class="btn-primary" target="_blank">Consultar Disponibilidade</a>
+            </div>
+            <div class="decants-visual fade-in">
+                <div class="bottle-display">
+                    <div class="liquid"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="produtos">
+        <div class="section-header fade-in">
+            <h2>Catálogo Exclusivo</h2>
+            <p>Selecionamos as melhores fragrâncias masculinas e femininas para você. Do oriental ao floral, do amadeirado ao cítrico.</p>
+        </div>
+
+        <div class="filter-tabs fade-in">
+            <button class="filter-btn active" onclick="filterProducts('all')">Todos</button>
+            <button class="filter-btn" onclick="filterProducts('masculino')">Masculinos</button>
+            <button class="filter-btn" onclick="filterProducts('feminino')">Femininos</button>
+            <button class="filter-btn" onclick="filterProducts('premium')">Premium</button>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Club Section -->
+    <section class="club" id="clube">
+        <div class="club-container fade-in">
+            <div class="club-icon"><i class="fas fa-crown"></i></div>
+            <h2>Clube de Descontos Aira</h2>
+            <p>Entre para o nosso grupo exclusivo no WhatsApp e tenha acesso a promoções especiais, lançamentos antecipados e descontos imperdíveis.</p>
+            <div class="club-benefits">
+                <div class="benefit-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Descontos Exclusivos</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Lançamentos em Primeira Mão</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Sorteios Mensais</span>
+                </div>
+            </div>
+            <a href="https://wa.me/5511987300190?text=Olá! Gostaria de participar do Clube de Descontos Aira." class="whatsapp-btn" target="_blank">
+                <i class="fab fa-whatsapp fa-lg"></i>
+                Entrar no Clube VIP
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Aira Perfumes</h3>
+                <p>Cada fragrância é uma assinatura de presença. Escolha a sua e deixe sua marca por onde passar. Especialistas em perfumes importados e decants exclusivos.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/parfum_aira?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/5511987300190" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Categorias</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Masculinos</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Femininos</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Premium</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Decants</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Atendimento</h4>
+                <ul>
+                    <li><a href="https://wa.me/5511987300190" target="_blank"><i class="fas fa-phone"></i> (11) 98730-0190</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Seg - Sáb: 9h às 20h</a></li>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> São Paulo, SP</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Links Úteis</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Política de Envio</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Trocas e Devoluções</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Autenticidade</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aira Perfumes. Todos os direitos reservados. Desenvolvido com <span>♥</span> para amantes de fragrâncias.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Product data with image paths - ADICIONE SUAS IMAGENS AQUI
+        const products = [
+            { 
+                name: 'Lattafa Asad', 
+                category: 'masculino', 
+                price: 'R$ 275,00', 
+                badge: 'Mais Vendido', 
+                image: 'assets/images/asad.jpg' // Substitua pelo nome da sua imagem
+            },
+            { 
+                name: 'Club de Nuit Intense Man', 
+                category: 'masculino', 
+                price: 'R$ 320,00', 
+                badge: 'Premium', 
+                image: 'assets/images/club-de-nuit.jpg' 
+            },
+            { 
+                name: 'Lattafa Fakhar Black', 
+                category: 'masculino', 
+                price: 'R$ 315,00', 
+                badge: '', 
+                image: 'assets/images/fakhar-black.jpg' 
+            },
+            { 
+                name: 'Salvo', 
+                category: 'masculino', 
+                price: 'R$ 310,00', 
+                badge: '', 
+                image: 'assets/images/salvo.jpg' 
+            },
+            { 
+                name: 'Fakhar Branco', 
+                category: 'feminino', 
+                price: 'R$ 315,00', 
+                badge: 'Mais Vendido', 
+                image: 'assets/images/fakhar-branco.jpg' 
+            },
+            { 
+                name: 'Sabah Al Ward', 
+                category: 'feminino', 
+                price: 'R$ 300,00', 
+                badge: '', 
+                image: 'assets/images/sabah-al-ward.jpg' 
+            },
+            { 
+                name: 'Afeef', 
+                category: 'feminino', 
+                price: 'R$ 430,00', 
+                badge: 'Premium', 
+                image: 'assets/images/afeef.jpg' 
+            },
+            { 
+                name: 'Royal Amber', 
+                category: 'feminino', 
+                price: 'R$ 470,00', 
+                badge: 'Premium', 
+                image: 'assets/images/royal-amber.jpg' 
+            },
+            { 
+                name: 'Khamra', 
+                category: 'premium', 
+                price: 'R$ 340,00', 
+                badge: 'Premium', 
+                image: 'assets/images/khamra.jpg' 
+            },
+            { 
+                name: 'Ameerati', 
+                category: 'premium', 
+                price: 'R$ 300,00', 
+                badge: '', 
+                image: 'assets/images/ameerati.jpg' 
+            },
+            { 
+                name: 'Atheeri', 
+                category: 'premium', 
+                price: 'R$ 600,00', 
+                badge: 'Exclusivo', 
+                image: 'assets/images/atheeri.jpg' 
+            },
+            { 
+                name: 'Tharwah Lattafa', 
+                category: 'premium', 
+                price: 'R$ 400,00', 
+                badge: '', 
+                image: 'assets/images/tharwah.jpg' 
+            },
+            { 
+                name: 'Al Noble Preto', 
+                category: 'masculino', 
+                price: 'R$ 340,00', 
+                badge: '', 
+                image: 'assets/images/al-noble-preto.jpg' 
+            },
+            { 
+                name: 'Al Noble Laranja', 
+                category: 'masculino', 
+                price: 'R$ 340,00', 
+                badge: '', 
+                image: 'assets/images/al-noble-laranja.jpg' 
+            },
+            { 
+                name: 'Yara Branco', 
+                category: 'feminino', 
+                price: 'R$ 330,00', 
+                badge: '', 
+                image: 'assets/images/yara-branco.jpg' 
+            },
+            { 
+                name: 'Yara Rose', 
+                category: 'feminino', 
+                price: 'R$ 305,00', 
+                badge: '', 
+                image: 'assets/images/yara-rose.jpg' 
+            }
+        ];
+
+        // Render products
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+            
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            filtered.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card fade-in';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                // Verifica se a imagem existe, senão usa placeholder
+                const imgHtml = product.image ? 
+                    `<img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 4rem; color: var(--gold); opacity: 0.3;\'><i class=\'fas fa-spray-can\'></i></div>'">` : 
+                    `<div style="font-size: 4rem; color: var(--gold); opacity: 0.3;"><i class="fas fa-spray-can"></i></div>`;
+                
+                card.innerHTML = `
+                    <div class="product-image">
+                        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                        ${imgHtml}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.category}</div>
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-price">${product.price}</div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart" onclick="contactWhatsApp('${product.name}')">Comprar</button>
+                            <button class="btn-quick-view" onclick="contactWhatsApp('${product.name}')"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            // Trigger fade in
+            setTimeout(() => {
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    if (isInViewport(el)) el.classList.add('visible');
+                });
+            }, 100);
+        }
+
+        function filterProducts(category) {
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(category) || (category === 'all' && btn.textContent === 'Todos')) {
+                    btn.classList.add('active');
+                }
+            });
+            renderProducts(category);
+        }
+
+        function contactWhatsApp(productName) {
+            const text = `Olá! Tenho interesse no perfume ${productName}. Poderia me passar mais informações?`;
+            window.open(`https://wa.me/5511987300190?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        // Intersection Observer for fade-in animations
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Initialize
+        renderProducts();
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
