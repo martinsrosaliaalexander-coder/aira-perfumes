@@ -165,7 +165,7 @@
             justify-content: center;
         }
 
-        /* Hero Section */
+        /* Hero Section - COM ANIMAÇÕES RESTAURADAS */
         .hero {
             height: 100vh;
             background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 50%, #0f0f0f 100%);
@@ -176,6 +176,7 @@
             overflow: hidden;
         }
 
+        /* ANIMAÇÃO DE SPRAY/PARTÍCULAS NO FUNDO */
         .hero::before {
             content: '';
             position: absolute;
@@ -183,8 +184,91 @@
             right: -10%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);
             animation: pulse 4s ease-in-out infinite;
+        }
+
+        /* Partículas de spray animadas */
+        .spray-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(212,175,55,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float-particle 8s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: -5%;
+            animation-delay: 0s;
+            animation-duration: 12s;
+        }
+
+        .particle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: -5%;
+            animation-delay: 2s;
+            animation-duration: 10s;
+        }
+
+        .particle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+            animation-duration: 14s;
+        }
+
+        .particle:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 30%;
+            right: 20%;
+            animation-delay: 1s;
+            animation-duration: 8s;
+        }
+
+        .particle:nth-child(5) {
+            width: 250px;
+            height: 250px;
+            bottom: 10%;
+            right: 30%;
+            animation-delay: 3s;
+            animation-duration: 11s;
+        }
+
+        @keyframes float-particle {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translate(30px, -30px) scale(1.1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-20px, 20px) scale(0.9);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translate(20px, 10px) scale(1.05);
+                opacity: 0.6;
+            }
         }
 
         @keyframes pulse {
@@ -197,6 +281,7 @@
             z-index: 2;
             max-width: 900px;
             padding: 0 20px;
+            position: relative;
         }
 
         .hero-logo-img {
@@ -210,6 +295,8 @@
             background: var(--black);
             padding: 10px;
             display: block;
+            position: relative;
+            z-index: 2;
         }
 
         @keyframes float {
@@ -225,6 +312,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            position: relative;
+            z-index: 2;
         }
 
         .hero p {
@@ -233,6 +322,8 @@
             margin-bottom: 40px;
             font-weight: 300;
             letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-buttons {
@@ -240,8 +331,11 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
 
+        /* BOTÃO VER CATÁLOGO COM BRILHO/GLOW */
         .btn-primary {
             background: var(--gold);
             color: var(--black);
@@ -255,13 +349,35 @@
             border: 2px solid var(--gold);
             display: inline-block;
             text-align: center;
+            position: relative;
+            /* Efeito de brilho */
+            box-shadow: 0 0 20px rgba(212,175,55,0.4),
+                        0 0 40px rgba(212,175,55,0.2),
+                        0 0 60px rgba(212,175,55,0.1);
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(212,175,55,0.4),
+                            0 0 40px rgba(212,175,55,0.2),
+                            0 0 60px rgba(212,175,55,0.1);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(212,175,55,0.6),
+                            0 0 60px rgba(212,175,55,0.4),
+                            0 0 90px rgba(212,175,55,0.2);
+            }
         }
 
         .btn-primary:hover {
             background: transparent;
             color: var(--gold);
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+            box-shadow: 0 0 40px rgba(212,175,55,0.6),
+                        0 0 80px rgba(212,175,55,0.4),
+                        0 0 120px rgba(212,175,55,0.2);
+            animation: none;
         }
 
         .btn-secondary {
@@ -290,6 +406,7 @@
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
+            z-index: 2;
         }
 
         @keyframes bounce {
@@ -945,6 +1062,13 @@
                 font-size: 2rem;
             }
 
+            /* Ajuste partículas no tablet */
+            .particle:nth-child(1) { width: 200px; height: 200px; }
+            .particle:nth-child(2) { width: 150px; height: 150px; }
+            .particle:nth-child(3) { width: 100px; height: 100px; }
+            .particle:nth-child(4) { width: 80px; height: 80px; }
+            .particle:nth-child(5) { width: 180px; height: 180px; }
+
             .decants-container {
                 grid-template-columns: 1fr;
                 gap: 40px;
@@ -957,6 +1081,12 @@
             .hero h1 {
                 font-size: 2.2rem;
             }
+
+            /* Ajuste glow no tablet */
+            .btn-primary {
+                box-shadow: 0 0 15px rgba(212,175,55,0.4),
+                            0 0 30px rgba(212,175,55,0.2);
+            }
         }
 
         /* Mobile específico - até 600px */
@@ -966,6 +1096,34 @@
                 height: auto;
                 min-height: 100vh;
                 padding: 120px 20px 80px;
+            }
+
+            /* Partículas menores no mobile */
+            .particle:nth-child(1) { 
+                width: 150px; 
+                height: 150px; 
+                top: 5%;
+            }
+            .particle:nth-child(2) { 
+                width: 100px; 
+                height: 100px; 
+                top: 70%;
+            }
+            .particle:nth-child(3) { 
+                width: 80px; 
+                height: 80px; 
+                bottom: 30%;
+                left: 10%;
+            }
+            .particle:nth-child(4) { 
+                width: 60px; 
+                height: 60px; 
+                top: 40%;
+            }
+            .particle:nth-child(5) { 
+                width: 120px; 
+                height: 120px; 
+                bottom: 20%;
             }
 
             .hero-logo-img {
@@ -989,7 +1147,30 @@
                 gap: 15px;
             }
 
-            .btn-primary, .btn-secondary {
+            /* BOTÃO VER CATÁLOGO COM GLOW AJUSTADO PARA MOBILE */
+            .btn-primary {
+                width: 100%;
+                padding: 16px 30px;
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+                /* Glow mais sutil no mobile */
+                box-shadow: 0 0 15px rgba(212,175,55,0.5),
+                            0 0 30px rgba(212,175,55,0.3);
+                animation: glow-pulse-mobile 2s ease-in-out infinite;
+            }
+
+            @keyframes glow-pulse-mobile {
+                0%, 100% {
+                    box-shadow: 0 0 15px rgba(212,175,55,0.5),
+                                0 0 30px rgba(212,175,55,0.3);
+                }
+                50% {
+                    box-shadow: 0 0 25px rgba(212,175,55,0.7),
+                                0 0 50px rgba(212,175,55,0.5);
+                }
+            }
+
+            .btn-secondary {
                 width: 100%;
                 padding: 16px 30px;
                 font-size: 0.85rem;
@@ -1006,7 +1187,7 @@
                 padding: 30px 20px;
             }
 
-            /* Decants - BOTÃO CONSULTAR CORRIGIDO */
+            /* Decants */
             .decants {
                 padding: 60px 20px;
             }
@@ -1162,12 +1343,23 @@
                 font-size: 1.8rem;
             }
 
+            /* Partículas ainda menores */
+            .particle:nth-child(1) { width: 100px; height: 100px; }
+            .particle:nth-child(2) { width: 80px; height: 80px; }
+            .particle:nth-child(5) { width: 90px; height: 90px; }
+
             .products-grid {
                 grid-template-columns: 1fr;
             }
 
             .product-image {
                 height: 250px;
+            }
+
+            /* Glow mais sutil em telas pequenas */
+            .btn-primary {
+                box-shadow: 0 0 10px rgba(212,175,55,0.4),
+                            0 0 20px rgba(212,175,55,0.2);
             }
         }
     </style>
@@ -1190,8 +1382,17 @@
         </button>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - COM ANIMAÇÕES RESTAURADAS -->
     <section class="hero" id="home">
+        <!-- Partículas de spray animadas no fundo -->
+        <div class="spray-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+
         <div class="hero-content">
             <img src="assets/images/logo.jpg" alt="Aira Perfumes" class="hero-logo-img" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';" onload="this.style.display='block'">
             
@@ -1359,8 +1560,6 @@
 
         // Mobile menu toggle
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            // Aqui você pode adicionar um menu mobile dropdown se quiser
-            // Por enquanto vamos apenas scrollar para a seção de contato
             document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
         });
 
