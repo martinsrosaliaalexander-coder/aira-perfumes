@@ -71,6 +71,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            z-index: 1001;
         }
 
         .logo span {
@@ -125,6 +126,7 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            white-space: nowrap;
         }
 
         .nav-cta::before {
@@ -145,6 +147,22 @@
 
         .nav-cta:hover::before {
             left: 0;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+            width: 50px;
+            height: 50px;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Hero Section */
@@ -235,6 +253,8 @@
             font-weight: 500;
             transition: all 0.3s;
             border: 2px solid var(--gold);
+            display: inline-block;
+            text-align: center;
         }
 
         .btn-primary:hover {
@@ -254,6 +274,8 @@
             letter-spacing: 3px;
             border: 1px solid rgba(255,255,255,0.3);
             transition: all 0.3s;
+            display: inline-block;
+            text-align: center;
         }
 
         .btn-secondary:hover {
@@ -379,6 +401,7 @@
             padding: 10px 25px;
             font-size: 0.9rem;
             transition: all 0.3s;
+            display: inline-block;
         }
 
         .size-tag:hover {
@@ -832,63 +855,6 @@
             color: var(--gold);
         }
 
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .decants-container {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .club-benefits {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                width: 100%;
-                padding: 0 20px;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
-                text-align: center;
-            }
-        }
-
         /* Animations */
         .fade-in {
             opacity: 0;
@@ -942,6 +908,268 @@
         .product-image img.loaded {
             opacity: 1;
         }
+
+        /* ============================================
+           RESPONSIVE - MOBILE FIRST ADJUSTMENTS
+           ============================================ */
+
+        /* Tablet e Mobile */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+                order: 3;
+                margin-left: 10px;
+            }
+
+            nav {
+                padding: 15px 4%;
+            }
+
+            /* BOTÃO MOBILE REDUZIDO */
+            .nav-cta {
+                order: 2;
+                padding: 8px 15px;
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+                margin-left: auto;
+                margin-right: 10px;
+                border-width: 1px;
+            }
+
+            .logo {
+                order: 1;
+                font-size: 2rem;
+            }
+
+            .decants-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Mobile específico - até 600px */
+        @media (max-width: 600px) {
+            /* Ajustes gerais */
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 120px 20px 80px;
+            }
+
+            .hero-logo-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            /* Botões hero em coluna */
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                gap: 15px;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                padding: 16px 30px;
+                font-size: 0.85rem;
+            }
+
+            /* Features em 1 coluna */
+            .features {
+                grid-template-columns: 1fr;
+                padding: 60px 20px;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 30px 20px;
+            }
+
+            /* Decants - BOTÃO CONSULTAR CORRIGIDO */
+            .decants {
+                padding: 60px 20px;
+            }
+
+            .decants-content h2 {
+                font-size: 2rem;
+            }
+
+            .decants-content p {
+                font-size: 1rem;
+            }
+
+            .decant-sizes {
+                gap: 10px;
+                margin-bottom: 30px;
+            }
+
+            .size-tag {
+                padding: 8px 20px;
+                font-size: 0.85rem;
+            }
+
+            /* BOTÃO DISPONIBILIDADE CORRIGIDO */
+            .decants-content .btn-primary {
+                width: 100%;
+                padding: 16px 20px;
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+                word-wrap: break-word;
+                white-space: normal;
+                line-height: 1.4;
+            }
+
+            .decants-visual {
+                height: 350px;
+            }
+
+            .bottle-display {
+                width: 150px;
+                height: 220px;
+            }
+
+            /* Produtos */
+            .products {
+                padding: 60px 20px;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .filter-tabs {
+                gap: 15px;
+                margin-bottom: 30px;
+            }
+
+            .filter-btn {
+                font-size: 0.8rem;
+                padding: 8px 15px;
+                letter-spacing: 1px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .product-image {
+                height: 180px;
+                padding: 10px;
+            }
+
+            .product-info {
+                padding: 20px;
+            }
+
+            .product-name {
+                font-size: 1.1rem;
+            }
+
+            .product-price {
+                font-size: 1.1rem;
+            }
+
+            .product-badge {
+                font-size: 0.65rem;
+                padding: 4px 10px;
+                top: 10px;
+                right: 10px;
+            }
+
+            /* Club */
+            .club {
+                padding: 60px 20px;
+            }
+
+            .club-container {
+                padding: 40px 20px;
+            }
+
+            .club h2 {
+                font-size: 1.8rem;
+            }
+
+            .club-benefits {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .benefit-item {
+                font-size: 0.9rem;
+                justify-content: center;
+            }
+
+            .whatsapp-btn {
+                width: 100%;
+                padding: 16px 30px;
+                font-size: 0.9rem;
+                justify-content: center;
+            }
+
+            /* Footer */
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .footer-column ul li a {
+                justify-content: center;
+            }
+        }
+
+        /* Mobile muito pequeno - até 400px */
+        @media (max-width: 400px) {
+            .nav-cta {
+                padding: 6px 12px;
+                font-size: 0.6rem;
+                letter-spacing: 0.5px;
+            }
+
+            .mobile-menu-btn {
+                font-size: 1.5rem;
+                width: 40px;
+                height: 40px;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image {
+                height: 250px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -957,7 +1185,9 @@
             <li><a href="#contato">Contato</a></li>
         </ul>
         <a href="https://wa.me/5511987300190" class="nav-cta" target="_blank">Falar com Vendedor</a>
-        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        <button class="mobile-menu-btn" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
     </nav>
 
     <!-- Hero Section -->
@@ -965,7 +1195,7 @@
         <div class="hero-content">
             <img src="assets/images/logo.jpg" alt="Aira Perfumes" class="hero-logo-img" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';" onload="this.style.display='block'">
             
-            <div id="fallback-logo" class="hero-logo" style="display: none; width: 120px; height: 120px; margin: 0 auto 40px; border: 2px solid var(--gold); border-radius: 50%; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--gold);">AR</div>
+            <div id="fallback-logo" class="hero-logo" style="display: none; width: 100px; height: 100px; margin: 0 auto 40px; border: 2px solid var(--gold); border-radius: 50%; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--gold);">AR</div>
             
             <h1>Essências que Marcam Presença</h1>
             <p>Perfumes 100% originais, importados e selecionados. Decants exclusivos e um clube de vantagens para quem entende de fragrâncias.</p>
@@ -1016,7 +1246,9 @@
                     <span class="size-tag">15ml</span>
                     <span class="size-tag">30ml</span>
                 </div>
-                <a href="https://wa.me/5511987300190?text=Olá! Gostaria de saber mais sobre os decants disponíveis." class="btn-primary" target="_blank">Consultar Disponibilidade</a>
+                <a href="https://wa.me/5511987300190?text=Olá! Gostaria de saber mais sobre os decants disponíveis." class="btn-primary" target="_blank">
+                    Consultar Disponibilidade
+                </a>
             </div>
             <div class="decants-visual fade-in">
                 <div class="bottle-display">
@@ -1123,6 +1355,13 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            // Aqui você pode adicionar um menu mobile dropdown se quiser
+            // Por enquanto vamos apenas scrollar para a seção de contato
+            document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
         });
 
         // Product data - NOMES EXATOS dos arquivos no seu repositório
