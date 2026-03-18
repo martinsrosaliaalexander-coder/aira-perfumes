@@ -182,8 +182,8 @@
         }
 
         .hero-logo-img {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             margin: 0 auto 40px;
             border: 2px solid var(--gold);
             border-radius: 50%;
@@ -191,6 +191,7 @@
             animation: float 3s ease-in-out infinite;
             background: var(--black);
             padding: 10px;
+            display: block;
         }
 
         @keyframes float {
@@ -534,7 +535,7 @@
         }
 
         .product-image {
-            height: 320px;
+            height: 280px;
             background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
             display: flex;
             align-items: center;
@@ -547,9 +548,12 @@
         .product-image img {
             max-width: 100%;
             max-height: 100%;
+            width: auto;
+            height: auto;
             object-fit: contain;
             transition: transform 0.4s;
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            display: block;
         }
 
         .product-card:hover .product-image img {
@@ -897,7 +901,18 @@
             transform: translateY(0);
         }
 
-        /* Image error fallback */
+        /* Image loading states */
+        .img-loading {
+            background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
         .img-error {
             display: flex;
             flex-direction: column;
@@ -905,6 +920,8 @@
             justify-content: center;
             color: var(--gold);
             opacity: 0.5;
+            width: 100%;
+            height: 100%;
         }
 
         .img-error i {
@@ -914,6 +931,16 @@
 
         .img-error span {
             font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .product-image img {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .product-image img.loaded {
+            opacity: 1;
         }
     </style>
 </head>
@@ -936,10 +963,9 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <!-- Tenta carregar a logo, se não tiver mostra o AR -->
-            <img src="assets/images/logo.jpg" alt="Aira Perfumes" class="hero-logo-img" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';">
+            <img src="assets/images/logo.jpg" alt="Aira Perfumes" class="hero-logo-img" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';" onload="this.style.display='block'">
             
-            <div id="fallback-logo" class="hero-logo" style="display: none;">AR</div>
+            <div id="fallback-logo" class="hero-logo" style="display: none; width: 120px; height: 120px; margin: 0 auto 40px; border: 2px solid var(--gold); border-radius: 50%; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--gold);">AR</div>
             
             <h1>Essências que Marcam Presença</h1>
             <p>Perfumes 100% originais, importados e selecionados. Decants exclusivos e um clube de vantagens para quem entende de fragrâncias.</p>
@@ -1183,7 +1209,7 @@
             `;
         }
 
-        // Render products
+        // Render products com lazy loading otimizado
         function renderProducts(filter = 'all') {
             const grid = document.getElementById('productsGrid');
             grid.innerHTML = '';
@@ -1195,19 +1221,19 @@
                 card.className = 'product-card fade-in';
                 card.style.animationDelay = `${index * 0.1}s`;
                 
-                // Cria um ID único para a imagem
                 const imgId = `img-${index}`;
+                const containerId = `container-${index}`;
                 
                 card.innerHTML = `
-                    <div class="product-image" id="container-${index}">
+                    <div class="product-image img-loading" id="${containerId}">
                         ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
                         <img 
                             src="${product.image}" 
                             alt="${product.name}" 
                             id="${imgId}"
-                            onerror="handleImageError('${imgId}', 'container-${index}', '${product.name}')"
-                            onload="handleImageLoad('${imgId}')"
-                            style="display: none;"
+                            loading="lazy"
+                            decoding="async"
+                            style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain;"
                         >
                     </div>
                     <div class="product-info">
@@ -1221,6 +1247,27 @@
                     </div>
                 `;
                 grid.appendChild(card);
+                
+                // Adiciona event listeners após inserir no DOM
+                setTimeout(() => {
+                    const img = document.getElementById(imgId);
+                    const container = document.getElementById(containerId);
+                    
+                    if (img && container) {
+                        img.onload = function() {
+                            container.classList.remove('img-loading');
+                            img.classList.add('loaded');
+                            console.log('✓ Carregado:', product.image);
+                        };
+                        
+                        img.onerror = function() {
+                            container.classList.remove('img-loading');
+                            img.style.display = 'none';
+                            container.innerHTML += createPlaceholder(product.name);
+                            console.error('✗ Erro:', product.image);
+                        };
+                    }
+                }, 0);
             });
 
             // Trigger fade in
@@ -1231,30 +1278,7 @@
             }, 100);
         }
 
-        // Handlers de imagem
-        function handleImageLoad(imgId) {
-            const img = document.getElementById(imgId);
-            if (img) {
-                img.style.display = 'block';
-            }
-        }
-
-        function handleImageError(imgId, containerId, productName) {
-            const img = document.getElementById(imgId);
-            const container = document.getElementById(containerId);
-            if (img && container) {
-                img.style.display = 'none';
-                // Adiciona placeholder apenas se ainda não existe
-                if (!container.querySelector('.img-error')) {
-                    const placeholder = document.createElement('div');
-                    placeholder.innerHTML = createPlaceholder(productName);
-                    container.appendChild(placeholder.firstElementChild);
-                }
-            }
-        }
-
         function filterProducts(category) {
-            // Update active button
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.textContent.toLowerCase().includes(category) || (category === 'all' && btn.textContent === 'Todos')) {
@@ -1269,7 +1293,7 @@
             window.open(`https://wa.me/5511987300190?text=${encodeURIComponent(text)}`, '_blank');
         }
 
-        // Intersection Observer for fade-in animations
+        // Intersection Observer para animações
         function isInViewport(element) {
             const rect = element.getBoundingClientRect();
             return (
@@ -1288,12 +1312,15 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
         // Initialize
         renderProducts();
 
-        // Smooth scroll for navigation
+        // Observa elementos para animação
+        setTimeout(() => {
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        }, 500);
+
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1304,11 +1331,9 @@
             });
         });
 
-        // Debug: mostra no console se as imagens estão sendo carregadas
-        console.log('Total de produtos:', products.length);
-        products.forEach(p => {
-            console.log('Carregando:', p.image);
-        });
+        // Log para debug
+        console.log('🚀 Aira Perfumes - Carregando imagens...');
+        console.log('📦 Total de produtos:', products.length);
     </script>
 </body>
 </html>
