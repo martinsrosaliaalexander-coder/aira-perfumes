@@ -181,34 +181,21 @@
             padding: 0 20px;
         }
 
-        .hero-logo {
+        .hero-logo-img {
             width: 150px;
             height: 150px;
             margin: 0 auto 40px;
             border: 2px solid var(--gold);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 4rem;
-            color: var(--gold);
-            position: relative;
+            object-fit: cover;
             animation: float 3s ease-in-out infinite;
+            background: var(--black);
+            padding: 10px;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
-        }
-
-        .hero-logo::after {
-            content: 'AIRA';
-            position: absolute;
-            bottom: -40px;
-            font-size: 1.2rem;
-            letter-spacing: 8px;
-            color: var(--white);
         }
 
         .hero h1 {
@@ -909,6 +896,25 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Image error fallback */
+        .img-error {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            opacity: 0.5;
+        }
+
+        .img-error i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .img-error span {
+            font-size: 0.8rem;
+        }
     </style>
 </head>
 <body>
@@ -930,7 +936,11 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <div class="hero-logo">AR</div>
+            <!-- Tenta carregar a logo, se não tiver mostra o AR -->
+            <img src="assets/images/logo.jpg" alt="Aira Perfumes" class="hero-logo-img" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';">
+            
+            <div id="fallback-logo" class="hero-logo" style="display: none;">AR</div>
+            
             <h1>Essências que Marcam Presença</h1>
             <p>Perfumes 100% originais, importados e selecionados. Decants exclusivos e um clube de vantagens para quem entende de fragrâncias.</p>
             <div class="hero-buttons">
@@ -1089,121 +1099,89 @@
             }
         });
 
-        // Product data with image paths - ADICIONE SUAS IMAGENS AQUI
+        // Product data - NOMES EXATOS dos arquivos no seu repositório
         const products = [
             { 
                 name: 'Lattafa Asad', 
                 category: 'masculino', 
                 price: 'R$ 275,00', 
                 badge: 'Mais Vendido', 
-                image: 'assets/images/asad.jpg' // Substitua pelo nome da sua imagem
+                image: 'assets/images/asad.jpg'
             },
             { 
                 name: 'Club de Nuit Intense Man', 
                 category: 'masculino', 
                 price: 'R$ 320,00', 
                 badge: 'Premium', 
-                image: 'assets/images/club-de-nuit.jpg' 
+                image: 'assets/images/club-de-nuit.jpg'
             },
             { 
                 name: 'Lattafa Fakhar Black', 
                 category: 'masculino', 
                 price: 'R$ 315,00', 
                 badge: '', 
-                image: 'assets/images/fakhar-black.jpg' 
+                image: 'assets/images/fakhar-black.jpg'
             },
             { 
                 name: 'Salvo', 
                 category: 'masculino', 
                 price: 'R$ 310,00', 
                 badge: '', 
-                image: 'assets/images/salvo.jpg' 
+                image: 'assets/images/salvo.jpg'
             },
             { 
                 name: 'Fakhar Branco', 
                 category: 'feminino', 
                 price: 'R$ 315,00', 
                 badge: 'Mais Vendido', 
-                image: 'assets/images/fakhar-branco.jpg' 
+                image: 'assets/images/fakhar-branco.jpg'
             },
             { 
                 name: 'Sabah Al Ward', 
                 category: 'feminino', 
                 price: 'R$ 300,00', 
                 badge: '', 
-                image: 'assets/images/sabah-al-ward.jpg' 
+                image: 'assets/images/sabah-al-ward.jpg'
             },
             { 
                 name: 'Afeef', 
                 category: 'feminino', 
                 price: 'R$ 430,00', 
                 badge: 'Premium', 
-                image: 'assets/images/afeef.jpg' 
-            },
-            { 
-                name: 'Royal Amber', 
-                category: 'feminino', 
-                price: 'R$ 470,00', 
-                badge: 'Premium', 
-                image: 'assets/images/royal-amber.jpg' 
-            },
-            { 
-                name: 'Khamra', 
-                category: 'premium', 
-                price: 'R$ 340,00', 
-                badge: 'Premium', 
-                image: 'assets/images/khamra.jpg' 
-            },
-            { 
-                name: 'Ameerati', 
-                category: 'premium', 
-                price: 'R$ 300,00', 
-                badge: '', 
-                image: 'assets/images/ameerati.jpg' 
-            },
-            { 
-                name: 'Atheeri', 
-                category: 'premium', 
-                price: 'R$ 600,00', 
-                badge: 'Exclusivo', 
-                image: 'assets/images/atheeri.jpg' 
-            },
-            { 
-                name: 'Tharwah Lattafa', 
-                category: 'premium', 
-                price: 'R$ 400,00', 
-                badge: '', 
-                image: 'assets/images/tharwah.jpg' 
+                image: 'assets/images/afeef.jpg'
             },
             { 
                 name: 'Al Noble Preto', 
                 category: 'masculino', 
                 price: 'R$ 340,00', 
                 badge: '', 
-                image: 'assets/images/al-noble-preto.jpg' 
-            },
-            { 
-                name: 'Al Noble Laranja', 
-                category: 'masculino', 
-                price: 'R$ 340,00', 
-                badge: '', 
-                image: 'assets/images/al-noble-laranja.jpg' 
+                image: 'assets/images/al-noble-preto.jpg'
             },
             { 
                 name: 'Yara Branco', 
                 category: 'feminino', 
                 price: 'R$ 330,00', 
                 badge: '', 
-                image: 'assets/images/yara-branco.jpg' 
+                image: 'assets/images/yara-branco.jpg'
             },
             { 
-                name: 'Yara Rose', 
-                category: 'feminino', 
-                price: 'R$ 305,00', 
-                badge: '', 
-                image: 'assets/images/yara-rose.jpg' 
+                name: 'Khamra', 
+                category: 'premium', 
+                price: 'R$ 340,00', 
+                badge: 'Premium', 
+                image: 'assets/images/khamra.jpg'
             }
         ];
+
+        // Função para criar placeholder quando imagem não carrega
+        function createPlaceholder(name) {
+            return `
+                <div class="img-error">
+                    <i class="fas fa-spray-can"></i>
+                    <span>${name}</span>
+                </div>
+            `;
+        }
 
         // Render products
         function renderProducts(filter = 'all') {
@@ -1217,15 +1195,20 @@
                 card.className = 'product-card fade-in';
                 card.style.animationDelay = `${index * 0.1}s`;
                 
-                // Verifica se a imagem existe, senão usa placeholder
-                const imgHtml = product.image ? 
-                    `<img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 4rem; color: var(--gold); opacity: 0.3;\'><i class=\'fas fa-spray-can\'></i></div>'">` : 
-                    `<div style="font-size: 4rem; color: var(--gold); opacity: 0.3;"><i class="fas fa-spray-can"></i></div>`;
+                // Cria um ID único para a imagem
+                const imgId = `img-${index}`;
                 
                 card.innerHTML = `
-                    <div class="product-image">
+                    <div class="product-image" id="container-${index}">
                         ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
-                        ${imgHtml}
+                        <img 
+                            src="${product.image}" 
+                            alt="${product.name}" 
+                            id="${imgId}"
+                            onerror="handleImageError('${imgId}', 'container-${index}', '${product.name}')"
+                            onload="handleImageLoad('${imgId}')"
+                            style="display: none;"
+                        >
                     </div>
                     <div class="product-info">
                         <div class="product-category">${product.category}</div>
@@ -1246,6 +1229,28 @@
                     if (isInViewport(el)) el.classList.add('visible');
                 });
             }, 100);
+        }
+
+        // Handlers de imagem
+        function handleImageLoad(imgId) {
+            const img = document.getElementById(imgId);
+            if (img) {
+                img.style.display = 'block';
+            }
+        }
+
+        function handleImageError(imgId, containerId, productName) {
+            const img = document.getElementById(imgId);
+            const container = document.getElementById(containerId);
+            if (img && container) {
+                img.style.display = 'none';
+                // Adiciona placeholder apenas se ainda não existe
+                if (!container.querySelector('.img-error')) {
+                    const placeholder = document.createElement('div');
+                    placeholder.innerHTML = createPlaceholder(productName);
+                    container.appendChild(placeholder.firstElementChild);
+                }
+            }
         }
 
         function filterProducts(category) {
@@ -1297,6 +1302,12 @@
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
+        });
+
+        // Debug: mostra no console se as imagens estão sendo carregadas
+        console.log('Total de produtos:', products.length);
+        products.forEach(p => {
+            console.log('Carregando:', p.image);
         });
     </script>
 </body>
